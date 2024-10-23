@@ -12,43 +12,43 @@ const Joke = ({ jokeObj }: { jokeObj: JokeObj }) => {
 
   const { id: jokeId, joke } = jokeObj
 
-  const fetchTraslation = async () => {
-    setLoadingTranslation(true)
-
-    try {
-      const response = await fetch('/api/translate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          text: [joke],
-          target_lang: selectedLanguage[jokeId],
-        }),
-      });
-
-      const data = await response.json();
-      // setting the translation in the state with the jokeId as the key to match it with the joke
-      setTranslation((prev) => ({
-        ...prev,
-        [jokeId]: data.translations[0].text,
-      }));
-      setTranslationError('');
-
-    } catch (error) {
-      console.log(error);
-      setTranslationError('Error fetching translation. Please try again later');
-    } finally {
-      setLoadingTranslation(false);
-    }
-  };
 
   useEffect(()=>{ // when the selected language changes, and if the selected languae state has jokeID as key; fetch the translation
     
     if(selectedLanguage[jokeId]){
+      const fetchTraslation = async () => {
+        setLoadingTranslation(true)
+    
+        try {
+          const response = await fetch('/api/translate', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              text: [joke],
+              target_lang: selectedLanguage[jokeId],
+            }),
+          });
+    
+          const data = await response.json();
+          // setting the translation in the state with the jokeId as the key to match it with the joke
+          setTranslation((prev) => ({
+            ...prev,
+            [jokeId]: data.translations[0].text,
+          }));
+          setTranslationError('');
+    
+        } catch (error) {
+          console.log(error);
+          setTranslationError('Error fetching translation. Please try again later');
+        } finally {
+          setLoadingTranslation(false);
+        }
+      };
       fetchTraslation()
     }
-  },[selectedLanguage, jokeId, fetchTraslation])
+  },[selectedLanguage, jokeId])
 
   return (
     <div className='bg-stone-100 border-2 h-[70%] my-6 shadow-lg rounded-md p-5 w-[90%] mx-auto relative'>
