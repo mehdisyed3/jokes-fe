@@ -17,7 +17,7 @@ Recognizing that the application's functionality was the primary criterion, I de
 
 Upon arriving on the jokes page, the user is presented with two cards, each displaying a joke. Each card includes a dropdown menu for selecting the desired language for translation.
 
-To fetch the jokes, I implemented React Query, which allowed me to efficiently manage the fetching process by providing access to properties like isLoading, data, and isFetching, reducing the amount of code I needed to write.
+To fetch the jokes, I implemented React Query a powerful data fetching & state management library, which allowed me to efficiently manage the fetching process by providing access to properties like isLoading, data, and isFetching, reducing the amount of code I needed to write.
 
 Since DeepL's API doesn't support direct calls from browser-based applications due to security concerns, I leveraged my backend knowledge to create a server-side route. This route securely interacts with the DeepL API, preventing exposure of sensitive credentials.
 
