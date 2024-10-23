@@ -12,13 +12,6 @@ const Joke = ({ jokeObj }: { jokeObj: JokeObj }) => {
 
   const { id: jokeId, joke } = jokeObj
 
-  useEffect(()=>{ // when the selected language changes, and if the selected languae state has jokeID as key; fetch the translation
-    
-    if(selectedLanguage[jokeId]){
-      fetchTraslation()
-    }//@ts-ignore
-  },[selectedLanguage, jokeId])
-
   const fetchTraslation = async () => {
     setLoadingTranslation(true)
 
@@ -49,6 +42,13 @@ const Joke = ({ jokeObj }: { jokeObj: JokeObj }) => {
       setLoadingTranslation(false);
     }
   };
+
+  useEffect(()=>{ // when the selected language changes, and if the selected languae state has jokeID as key; fetch the translation
+    
+    if(selectedLanguage[jokeId]){
+      fetchTraslation()
+    }
+  },[selectedLanguage, jokeId, fetchTraslation])
 
   return (
     <div className='bg-stone-100 border-2 h-[70%] my-6 shadow-lg rounded-md p-5 w-[90%] mx-auto relative'>
