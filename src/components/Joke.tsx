@@ -5,7 +5,7 @@ import { JokeObj, Translation } from '@/types/customTypes';
 
 
 const Joke = ({ jokeObj }: { jokeObj: JokeObj }) => {
-  const [translation, setTranslation] = React.useState<Translation | {}>({});
+  const [translation, setTranslation] = React.useState<Translation>({});
   const [loadingTranslation, setLoadingTranslation] = useState<boolean>(false)
   const [selectedLanguage, setSelectedLanguage] = useState<{ [key: string]: string }>({});
   const [translationError, setTranslationError] = useState<string>('');
@@ -16,8 +16,8 @@ const Joke = ({ jokeObj }: { jokeObj: JokeObj }) => {
     
     if(selectedLanguage[jokeId]){
       fetchTraslation()
-    }
-  },[selectedLanguage])
+    }//@ts-ignore
+  },[selectedLanguage, jokeId])
 
   const fetchTraslation = async () => {
     setLoadingTranslation(true)
